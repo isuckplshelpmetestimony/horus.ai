@@ -1,0 +1,117 @@
+HORUS — BRANDING & DESIGN SYSTEM
+================================
+Updated: 2026-07-07
+Palette status: LOCKED — MONOCHROME + GREEN ACCENT
+
+NAME
+----
+Horus — Egyptian god of the sky; eye symbol = oversight, seeing through messy financials.
+
+LOGOS
+-----
+Structure: eye icon (concentric circles + pupil) · thin vertical separator · Horus wordmark (capital H, lowercase rest) · clean sans-serif.
+
+| Variant              | File                    | Use                              |
+|----------------------|-------------------------|----------------------------------|
+| Dark background      | horus-logo-dark.png     | Dark / black backgrounds         |
+| Light background     | horus-logo-light.png    | Light / cream / white backgrounds|
+
+DESIGN SYSTEM
+-------------
+Early-stage UI mockups filed 2026-07-07. Placeholder brand in mockups was "Acme Treasury" — Horus is the actual product name.
+
+Reference assets (PNG images — upload separately to AI Studio):
+- CANONICAL (locked): horus-ui-design-system-monochrome-green-accent.png
+- Original explorations: horus-ui-design-system-palette-variants.png
+- Earlier Gemini draft: horus-ui-design-system-gemini-reference.png
+
+STYLE: INSTITUTIONAL BRUTALISM
+------------------------------
+High-contrast, boxy, functional UI chrome. Clear borders, structured layout, no decorative fluff. Suited to B2B banking / treasury context.
+
+TYPOGRAPHY
+----------
+Klarheit Grotesk — primary typeface across product UI, marketing, and email signatures.
+Font: https://klim.co.nz/fonts/klarheit/
+
+DEFAULT PALETTE — MONOCHROME + GREEN ACCENT (LOCKED)
+----------------------------------------------------
+Founder decision (2026-07-07): "We're going with monochrome plus the green accent."
+
+The canonical Horus look is mostly grayscale with dark forest green reserved for key interactive moments — not a fully green-tinted UI.
+
+| Layer              | Treatment                                                                 |
+|--------------------|---------------------------------------------------------------------------|
+| Base               | Off-white / white backgrounds · black or near-black text · gray borders · gray secondary/disabled states |
+| Structure          | Monochrome chrome everywhere by default — nav links, breadcrumbs, inputs, modals, footers stay neutral |
+| Green accent       | Dark forest green ONLY on: primary CTA · active tab · selected checkbox/radio · toggle-on · Confirm button · focused input border (optional) |
+| Error              | Red border + red helper text — never green                                |
+| Stays black/gray   | Secondary buttons · ghost/tertiary links · inactive tabs · disabled states · body copy · dividers |
+
+Rule of thumb: If it's not clickable or "active," it stays monochrome. Green is punctuation, not wallpaper.
+
+PALETTE VARIANTS (REFERENCE EXPLORATIONS)
+-----------------------------------------
+| Variant                    | Description                                      | Role                                      |
+|----------------------------|--------------------------------------------------|-------------------------------------------|
+| MONOCHROME + GREEN ACCENT  | Grayscale base + green on primary/active only    | DEFAULT — product UI, email banners       |
+| PURE MONOCHROME            | Moodboard grays only — no color accent           | Print, legal, zero-color contexts         |
+| CONCRETE + GREEN           | Concrete-gray surfaces + green accents throughout| Alternate — more environmental green      |
+| DEEP SPEC                  | Cream/parchment + green-accent borders           | Alternate — warmer marketing surfaces     |
+
+PURE MONOCHROME (no green)
+- Background: off-white / very light gray
+- Accent: solid black only
+- Buttons: primary = black fill + white text; secondary = white + black border
+- Use when: stripped-down contexts, print, or zero-color requirements
+
+CONCRETE + GREEN (alternate)
+- Background: light neutral "concrete" gray
+- Primary accent: dark forest green on buttons, tabs, controls, CTAs
+- Feel: greener overall environment than founder default
+
+DEEP SPEC (alternate)
+- Same green accent family on warmer cream / parchment backgrounds
+- Borders: more pronounced green-accent borders on containers
+- Use when: marketing that needs warmth without losing institutional tone
+
+UI COMPONENT PATTERNS (FROM MOCKUPS)
+------------------------------------
+| Component       | Pattern                                                                 |
+|-----------------|-------------------------------------------------------------------------|
+| Top nav         | Logo left · text links center/right · primary CTA (e.g. "Book a demo") |
+| Buttons         | Primary (solid accent) · Secondary (outlined) · Ghost/Tertiary · Disabled |
+| Text input      | Default · Focused (accent border) · Error (red border + message)       |
+| Dropdown        | Closed select · open menu with account-type options                      |
+| Checkbox + radio| Unselected outline · selected = accent fill                            |
+| Toggle          | Off (gray) · On (accent)                                                 |
+| Tabs            | Text tabs · active = accent underline                                    |
+| Breadcrumb      | Home > Products > … hierarchy                                            |
+| Badges / tags   | Pill shapes — e.g. "Enterprise", "SOC 2"                                 |
+| Search bar      | Full-width field · magnifier · optional ⌘ K hint                         |
+| Modal           | Title · body copy · Cancel (secondary) + Confirm (primary)               |
+| Footer links    | Privacy · Terms · Security · Contact · copyright line                    |
+
+Note: Exact hex values — sample from horus-ui-design-system-monochrome-green-accent.png. Not yet tokenized in code.
+
+TAGLINE (WORKING)
+-----------------
+SME cash flow reconstruction for Philippine rural banks — help credit analysts stop re-keying messy documents into Excel.
+
+PRODUCT LAYERS (FOR EXTERNAL COMMS)
+-----------------------------------
+1. Document ingestion (MVP) — OCR on PH bank statements and SME docs
+2. Structured reconstruction — auto-populate Excel template; analyst reviews
+3. Judgment augmentation — seasonality, ESDG, multi-business (later)
+
+EMAIL SIGNATURE BANNER (DESIGN NOTES)
+-------------------------------------
+Use MONOCHROME + GREEN ACCENT — white/off-white ground, black/gray type, green CTA only.
+
+| Element        | Guidance                                                    |
+|----------------|-------------------------------------------------------------|
+| Logo           | horus-logo-light.png on white/off-white ground              |
+| Typography     | Klarheit Grotesk — black or dark gray body text             |
+| CTA            | Single green accent — button or link                        |
+| Rest of banner | Monochrome — no green backgrounds or green-tinted panels    |
+| Dimensions     | 600–800 px wide · keep under 500 KB PNG                     |

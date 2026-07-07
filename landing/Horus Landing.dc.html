@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <meta charset="utf-8" />
+  <title>Horus — SME cash flow reconstruction</title>
+  <style>
+    :root {
+      --bg: #F5F5F2;
+      --surface: #FFFFFF;
+      --border: #DAD9D4;
+      --border-strong: #17171599;
+      --text: #171715;
+      --muted: #6C6C66;
+      --accent: #1D5C3C;
+      --accent-ink: #FFFFFF;
+      --error: #C0392B;
+      --header-bg: rgba(245, 245, 242, 0.78);
+      --logo-light-disp: block;
+      --logo-dark-disp: none;
+      --card-shadow: 0 1px 0 rgba(23,23,21,0.04);
+      --card-shadow-hover: 0 6px 20px rgba(23,23,21,0.08);
+      --cta-glow: 0 4px 18px rgba(29,92,60,0.28);
+      --wash: radial-gradient(900px 480px at 50% -10%, rgba(29,92,60,0.07), transparent 70%);
+    }
+    :root[data-theme="dark"] {
+      --bg: #0E0E0D;
+      --surface: #161615;
+      --border: #2B2B28;
+      --border-strong: #F2F2EF66;
+      --text: #F2F2EF;
+      --muted: #94948C;
+      --accent: #3E9E6B;
+      --accent-ink: #0B130E;
+      --error: #E2604F;
+      --header-bg: rgba(14, 14, 13, 0.72);
+      --logo-light-disp: none;
+      --logo-dark-disp: block;
+      --card-shadow: none;
+      --card-shadow-hover: 0 6px 24px rgba(0,0,0,0.45);
+      --cta-glow: 0 4px 20px rgba(62,158,107,0.30);
+      --wash: radial-gradient(900px 480px at 50% -10%, rgba(62,158,107,0.09), transparent 70%);
+    }
+    html, body { margin: 0; padding: 0; background: var(--bg); }
+    body { -webkit-font-smoothing: antialiased; }
+    a { color: var(--text); text-decoration: none; transition: color 160ms cubic-bezier(0.2,0.8,0.2,1); }
+    a:hover { color: var(--accent); }
+    [data-reveal] { opacity: 0; transform: translateY(14px); transition: opacity 480ms cubic-bezier(0.2,0.8,0.2,1), transform 480ms cubic-bezier(0.2,0.8,0.2,1); }
+    [data-reveal].rv-in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
+      * { transition-duration: 0.01ms !important; }
+    }
+  </style>
+</helmet>
+
+<div style="min-height: 100vh; background: var(--bg); color: var(--text); font-family: 'ES Klarheit Grotesk', 'Klarheit Grotesk', -apple-system, 'Helvetica Neue', 'Segoe UI', Arial, sans-serif; font-size: 16px; line-height: 1.5; transition: background 160ms linear, color 160ms linear;">
+
+  <!-- ============ HEADER ============ -->
+  <header data-screen-label="Header" style="position: sticky; top: 0; z-index: 50; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); background: var(--header-bg); border-bottom: 1px solid var(--border);">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 0 32px; height: 64px; display: flex; align-items: center; justify-content: space-between;">
+      <div style="display: flex; align-items: center;">
+        <img src="assets/horus-logo-light.png" alt="Horus" style="height: 44px; display: var(--logo-light-disp); mix-blend-mode: multiply;" />
+        <img src="assets/horus-logo-dark.jpg" alt="Horus" style="height: 44px; display: var(--logo-dark-disp); mix-blend-mode: screen;" />
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <button onClick="{{ toggleTheme }}" aria-label="Toggle color theme" title="Toggle light / dark" style="width: 36px; height: 36px; display: grid; place-items: center; background: transparent; border: 1px solid var(--border); border-radius: 6px; color: var(--muted); cursor: pointer; transition: border-color 160ms cubic-bezier(0.2,0.8,0.2,1), color 160ms cubic-bezier(0.2,0.8,0.2,1);" style-hover="border-color: var(--border-strong); color: var(--text);">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><circle cx="7.5" cy="7.5" r="6.5" stroke="currentColor"></circle><path d="M7.5 1 A 6.5 6.5 0 0 0 7.5 14 Z" fill="currentColor"></path></svg>
+        </button>
+        <a href="#get-started" style="display: inline-flex; align-items: center; height: 36px; padding: 0 18px; background: var(--accent); color: var(--accent-ink); font-size: 14px; font-weight: 600; letter-spacing: 0.01em; border-radius: 6px; transition: filter 160ms cubic-bezier(0.2,0.8,0.2,1), box-shadow 160ms cubic-bezier(0.2,0.8,0.2,1);" style-hover="filter: brightness(1.1); box-shadow: var(--cta-glow); color: var(--accent-ink);">Get Started</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section data-screen-label="Hero" style="position: relative; background-image: var(--wash);">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 120px 32px 96px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+      <div data-reveal style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--border); border-radius: 999px; padding: 6px 14px; font-size: 13px; color: var(--muted); margin-bottom: 32px;">
+        <span style="width: 6px; height: 6px; border-radius: 999px; background: var(--accent); display: inline-block;"></span>
+        SME cash flow reconstruction for Philippine rural and thrift banks
+      </div>
+      <h1 data-reveal style="margin: 0 0 24px; font-size: clamp(40px, 6vw, 64px); line-height: 1.06; letter-spacing: -0.03em; font-weight: 650; max-width: 840px; text-wrap: balance;">Stop re-keying messy SME documents into Excel.</h1>
+      <p data-reveal style="margin: 0 0 40px; font-size: clamp(17px, 2vw, 20px); line-height: 1.55; color: var(--muted); max-width: 620px; text-wrap: pretty;">Horus rebuilds borrower cash flows from scanned statements and ledgers — faster, cleaner, and audit-ready.</p>
+      <div data-reveal id="get-started" style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+        <a href="#" style="display: inline-flex; align-items: center; height: 48px; padding: 0 32px; background: var(--accent); color: var(--accent-ink); font-size: 16px; font-weight: 600; border-radius: 6px; transition: filter 160ms cubic-bezier(0.2,0.8,0.2,1), box-shadow 160ms cubic-bezier(0.2,0.8,0.2,1);" style-hover="filter: brightness(1.1); box-shadow: var(--cta-glow); color: var(--accent-ink);">Get Started</a>
+        <p style="margin: 0; font-size: 14px; color: var(--muted);">Built for credit analysts handling scanned statements, ledgers, and inconsistent borrower records.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PIPELINE ============ -->
+  <section data-screen-label="Pipeline" style="border-top: 1px solid var(--border);">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 0 32px;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+        <sc-for list="{{ pipeline }}" as="step" hint-placeholder-count="3">
+          <div data-reveal style="padding: 48px 32px 48px 0; border-right: 1px solid var(--border); padding-left: 32px; margin-left: -32px;">
+            <div style="font-size: 12px; font-weight: 600; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 16px;">{{ step.num }}</div>
+            <h3 style="margin: 0 0 8px; font-size: 20px; font-weight: 650; letter-spacing: -0.01em;">{{ step.title }}</h3>
+            <p style="margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted); text-wrap: pretty;">{{ step.desc }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURES ============ -->
+  <section data-screen-label="Features" style="border-top: 1px solid var(--border);">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 96px 32px;">
+      <div data-reveal style="max-width: 560px; margin-bottom: 56px;">
+        <h2 style="margin: 0 0 12px; font-size: clamp(28px, 4vw, 40px); line-height: 1.12; letter-spacing: -0.02em; font-weight: 650; text-wrap: balance;">Everything an analyst needs. Nothing they have to fight.</h2>
+        <p style="margin: 0; font-size: 17px; color: var(--muted); text-wrap: pretty;">A productivity tool for credit teams — Horus prepares the numbers; your analysts make the call.</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+        <sc-for list="{{ features }}" as="f" hint-placeholder-count="6">
+          <div data-reveal style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 28px; box-shadow: var(--card-shadow); transition: transform 180ms cubic-bezier(0.2,0.8,0.2,1), box-shadow 180ms cubic-bezier(0.2,0.8,0.2,1), border-color 180ms cubic-bezier(0.2,0.8,0.2,1);" style-hover="transform: translateY(-3px); box-shadow: var(--card-shadow-hover); border-color: var(--border-strong);">
+            <div style="width: 36px; height: 36px; display: grid; place-items: center; border: 1px solid var(--border); border-radius: 6px; margin-bottom: 20px; color: var(--accent); font-size: 13px; font-weight: 650;">{{ f.glyph }}</div>
+            <h3 style="margin: 0 0 8px; font-size: 17px; font-weight: 650; letter-spacing: -0.01em;">{{ f.title }}</h3>
+            <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--muted); text-wrap: pretty;">{{ f.desc }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BEFORE / AFTER ============ -->
+  <section data-screen-label="Before After" style="border-top: 1px solid var(--border);">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 96px 32px;">
+      <div data-reveal style="max-width: 560px; margin-bottom: 48px;">
+        <h2 style="margin: 0 0 12px; font-size: clamp(28px, 4vw, 40px); line-height: 1.12; letter-spacing: -0.02em; font-weight: 650; text-wrap: balance;">Days of re-keying, reduced to hours of review.</h2>
+        <p style="margin: 0; font-size: 17px; color: var(--muted); text-wrap: pretty;">Illustrative turnaround from pilot-style case profiles. Actual figures depend on document quality and case complexity.</p>
+      </div>
+      <div data-reveal style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 14.5px; min-width: 720px;">
+          <thead>
+            <tr>
+              <th style="text-align: left; padding: 14px 20px; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--border);">Case</th>
+              <th style="text-align: right; padding: 14px 20px; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--border);">Old (days)</th>
+              <th style="text-align: right; padding: 14px 20px; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--border);">New (days)</th>
+              <th style="text-align: right; padding: 14px 20px; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--border);">Analyst hours saved</th>
+              <th style="text-align: left; padding: 14px 20px; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--border);">Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <sc-for list="{{ cases }}" as="c" hint-placeholder-count="4">
+              <tr>
+                <td style="padding: 16px 20px; border-bottom: 1px solid var(--border); font-weight: 550;">{{ c.name }}</td>
+                <td style="padding: 16px 20px; border-bottom: 1px solid var(--border); text-align: right; color: var(--muted); font-variant-numeric: tabular-nums;">{{ c.old }}</td>
+                <td style="padding: 16px 20px; border-bottom: 1px solid var(--border); text-align: right; color: var(--accent); font-weight: 650; font-variant-numeric: tabular-nums;">{{ c.new }}</td>
+                <td style="padding: 16px 20px; border-bottom: 1px solid var(--border); text-align: right; font-variant-numeric: tabular-nums;">{{ c.saved }}</td>
+                <td style="padding: 16px 20px; border-bottom: 1px solid var(--border); color: var(--muted);">{{ c.notes }}</td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DIAGRAM ============ -->
+  <section data-screen-label="Diagram" style="border-top: 1px solid var(--border);">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 96px 32px;">
+      <div data-reveal style="max-width: 620px; margin-bottom: 48px;">
+        <h2 style="margin: 0 0 12px; font-size: clamp(28px, 4vw, 40px); line-height: 1.12; letter-spacing: -0.02em; font-weight: 650; text-wrap: balance;">Everything between messy docs and credit-ready cash flows.</h2>
+      </div>
+      <div data-reveal style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; align-items: stretch;">
+        <div style="border: 1px solid var(--border); border-radius: 8px; padding: 28px; background: var(--surface);">
+          <div style="font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px;">In</div>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="border: 1px solid var(--border); border-radius: 6px; padding: 12px 16px; font-size: 14.5px;">Bank statement PDFs &amp; scans</div>
+            <div style="border: 1px solid var(--border); border-radius: 6px; padding: 12px 16px; font-size: 14.5px;">Phone photos of documents</div>
+            <div style="border: 1px solid var(--border); border-radius: 6px; padding: 12px 16px; font-size: 14.5px;">Handwritten sales ledgers</div>
+            <div style="border: 1px solid var(--border); border-radius: 6px; padding: 12px 16px; font-size: 14.5px;">Inventory &amp; expense notes</div>
+          </div>
+        </div>
+        <div style="border: 1px solid var(--accent); border-radius: 8px; padding: 28px; background: var(--surface);">
+          <div style="font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px;">Horus</div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <div style="padding: 12px 16px; font-size: 14.5px; border: 1px solid var(--border); border-radius: 6px;">Extraction</div>
+            <div style="text-align: center; color: var(--muted); font-size: 12px; line-height: 1;">↓</div>
+            <div style="padding: 12px 16px; font-size: 14.5px; border: 1px solid var(--border); border-radius: 6px;">Normalization</div>
+            <div style="text-align: center; color: var(--muted); font-size: 12px; line-height: 1;">↓</div>
+            <div style="padding: 12px 16px; font-size: 14.5px; border: 1px solid var(--border); border-radius: 6px;">Reconstruction</div>
+            <div style="text-align: center; color: var(--muted); font-size: 12px; line-height: 1;">↓</div>
+            <div style="padding: 12px 16px; font-size: 14.5px; border: 1px solid var(--border); border-radius: 6px;">Analyst review</div>
+          </div>
+        </div>
+        <div style="border: 1px solid var(--border); border-radius: 8px; padding: 28px; background: var(--surface);">
+          <div style="font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px;">Out</div>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="border: 1px solid var(--border); border-radius: 6px; padding: 12px 16px; font-size: 14.5px;">Credit-ready cash flow statements</div>
+            <div style="border: 1px solid var(--border); border-radius: 6px; padding: 12px 16px; font-size: 14.5px;">DSCR-ready income, expense &amp; debt streams</div>
+            <div style="border: 1px solid var(--border); border-radius: 6px; padding: 12px 16px; font-size: 14.5px;">Report artifacts with full audit trail</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer data-screen-label="Footer" style="border-top: 1px solid var(--border);">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 48px 32px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px;">
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <img src="assets/horus-logo-light.png" alt="Horus" style="height: 36px; display: var(--logo-light-disp); mix-blend-mode: multiply;" />
+        <img src="assets/horus-logo-dark.jpg" alt="Horus" style="height: 36px; display: var(--logo-dark-disp); mix-blend-mode: screen;" />
+        <span style="font-size: 13px; color: var(--muted);">© 2026 Horus</span>
+      </div>
+      <nav style="display: flex; gap: 28px; font-size: 14px;">
+        <a href="#" style="color: var(--muted);">Privacy</a>
+        <a href="#" style="color: var(--muted);">Terms</a>
+        <a href="#" style="color: var(--muted);">Security</a>
+        <a href="#" style="color: var(--muted);">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;theme&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;system&quot;, &quot;light&quot;, &quot;dark&quot;], &quot;default&quot;: &quot;system&quot;, &quot;tsType&quot;: &quot;\&quot;system\&quot; | \&quot;light\&quot; | \&quot;dark\&quot;&quot;, &quot;section&quot;: &quot;Appearance&quot; },
+  &quot;accent&quot;: { &quot;editor&quot;: &quot;color&quot;, &quot;options&quot;: [&quot;#1D5C3C&quot;, &quot;#166A45&quot;, &quot;#2E7D52&quot;], &quot;default&quot;: &quot;#1D5C3C&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Appearance&quot; }
+}">
+class Component extends DCLogic {
+  state = { theme: null }; // null = follow prop/system
+
+  resolvedTheme() {
+    const pref = this.props.theme ?? "system";
+    const explicit = this.state.theme ?? (pref === "system" ? null : pref);
+    if (explicit) return explicit;
+    try {
+      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    } catch (e) {
+      return "light";
+    }
+  }
+
+  applyTheme() {
+    document.documentElement.dataset.theme = this.resolvedTheme();
+    const accent = this.props.accent;
+    if (accent) document.documentElement.style.setProperty("--accent", accent);
+  }
+
+  componentDidMount() {
+    this.applyTheme();
+    this._mq = window.matchMedia("(prefers-color-scheme: dark)");
+    this._onMq = () => { if (!this.state.theme) this.applyTheme(); };
+    this._mq.addEventListener("change", this._onMq);
+
+    // Reveal-on-scroll
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const els = document.querySelectorAll("[data-reveal]");
+    if (reduced || !("IntersectionObserver" in window)) {
+      els.forEach((el) => el.classList.add("rv-in"));
+      return;
+    }
+    this._io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("rv-in");
+          this._io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+    els.forEach((el) => this._io.observe(el));
+  }
+
+  componentDidUpdate() {
+    this.applyTheme();
+  }
+
+  componentWillUnmount() {
+    if (this._io) this._io.disconnect();
+    if (this._mq) this._mq.removeEventListener("change", this._onMq);
+  }
+
+  renderVals() {
+    return {
+      toggleTheme: () => {
+        const next = this.resolvedTheme() === "dark" ? "light" : "dark";
+        this.setState({ theme: next });
+      },
+      pipeline: [
+        { num: "01 — INGEST", title: "Ingest", desc: "OCR and parse PH bank statements and SME documents — PDFs, scans, and phone photos included." },
+        { num: "02 — RECONSTRUCT", title: "Reconstruct", desc: "Normalize raw transactions into credit-ready income, expense, and debt streams." },
+        { num: "03 — REVIEW", title: "Review", desc: "Analysts correct and approve every line, with a full audit trail behind each figure." }
+      ],
+      features: [
+        { glyph: "OCR", title: "Built for messy PH documents", desc: "Ingestion tuned for statements from BDO, BPI, Metrobank, Landbank, UnionBank, and rural banks — even low-quality scans and photos." },
+        { glyph: "XLS", title: "Structured cash flow reconstruction", desc: "Replaces manual Excel re-keying with auto-populated income, expense, and debt schedules over a 2–3 year horizon." },
+        { glyph: "REV", title: "Analyst review workflow", desc: "Every extracted line is reviewable and correctable. Horus assists judgment — it never makes the credit decision." },
+        { glyph: "AUD", title: "Audit trail & explainability", desc: "Each figure links back to its source document and page, so reviewers and examiners can trace every number." },
+        { glyph: "CSE", title: "Case management", desc: "Track active applications by stage, flag missing documents, and chase borrowers before cases stall." },
+        { glyph: "ECO", title: "Better unit economics", desc: "Cut per-case turnaround from days to hours — illustrative pilots suggest 10–15 analyst hours saved per SME case." }
+      ],
+      cases: [
+        { name: "Sari-sari wholesale distributor", old: "6", new: "1.5", saved: "14 h", notes: "Three bank accounts, mixed scan quality" },
+        { name: "Poultry contract grower", old: "8", new: "2", saved: "18 h", notes: "Seasonal cycles, handwritten ledgers" },
+        { name: "Resort operator, Batangas", old: "5", new: "1", saved: "11 h", notes: "High transaction volume, two statements" },
+        { name: "Rice trading, multi-business", old: "10", new: "2.5", saved: "22 h", notes: "Intercompany flows across two entities" }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

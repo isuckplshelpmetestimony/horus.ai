@@ -1,0 +1,78 @@
+HORUS — PRODUCT ROADMAP
+=========================
+Updated: 2026-07-01
+
+THREE LAYERS (BUILD SEQUENCE)
+-----------------------------
+
+Layer 1 — Document ingestion (MVP)
+- Parse PH bank statements (BDO, BPI, Metrobank, Landbank, UnionBank, rural banks) from PDFs, scans, photos
+- Extract sales ledgers, inventory notes where possible
+- Moat: OCR that works on messy PH formats — confirmed hardest problem (ewb-oil-crisis-stress-test-v1 · mom at EWB: "definitely OCR")
+
+Layer 2 — Structured reconstruction
+- Map extractions → income / expense / debt streams (2–3 year horizon per Dindo)
+- Dynamic rows (utilities, outsourced labor, loan facilities, household expenses)
+- Analyst reviews/corrects — productivity tool, not decisioning (horus-competitive-landscape · BSP Circular 855 / 1137 framing)
+
+Layer 3 — Judgment augmentation
+- Industry seasonality prompts (eggs/school holidays, resorts, agri)
+- Business-model identification (contract grower vs commercial, in-house motorcycle lending)
+- ESDG / heat-map checklist capture
+- Multi-business consolidation + intercompany adjustments
+
+Platform wrapper
+- Case management: active apps, stage, missing docs
+- Aggregate exposure lookup automation (Call 2 pain — simpler win)
+
+EXPLICITLY NOT BUILDING (V1)
+----------------------------
+| Out of scope                  | Why                                              |
+|-------------------------------|--------------------------------------------------|
+| Credit scoring platform       | Downstream; CRDPh/BSP initiatives exist          |
+| Approve/deny recommendations  | Decisioning → heavy BSP validation               |
+| Register of Deeds workflow    | Govt bottleneck; no leverage                     |
+| Carbon credit arbiter         | Separate product (Dindo tangent Call 2)          |
+| Consumer telco/social scoring | Trusting Social / Home Credit lane               |
+
+REGULATORY POSTURE
+------------------
+- Productivity tool for analysts — not automated credit decision
+- BSP Circular 1137 — relevant at pilot/contract stage, not discovery
+- Data Privacy Act — consent + PIA before real borrower data
+
+Details: ph-sme-lending-research-bangko-kabayan
+
+CLEARINGHOUSE ANALYSIS (VS CLIO)
+--------------------------------
+| Risk                                      | Horus                                                        |
+|-------------------------------------------|--------------------------------------------------------------|
+| External gatekeeper that can block build  | None equivalent for reconstruction                           |
+| OCR                                       | Internal technical problem — solve once                      |
+| BSP approval                              | Bank's outsourcing burden at deploy; lighter for productivity tools |
+| Register of Deeds                         | Avoid — don't touch collateral registration                  |
+
+PRICING HYPOTHESES (PRE-REVENUE)
+--------------------------------
+| Model              | Low           | High          | Notes                              |
+|--------------------|---------------|---------------|------------------------------------|
+| Per loan           | ₱500          | ₱2–3k         | Aligns with volume                 |
+| Per seat/mo        | ₱3k/analyst   | ₱8k/analyst   | 20+ CAs at BK                      |
+| Platform license   | ₱20k/bank/mo  | ₱80–100k      | Recommended MVP — simplest procurement |
+
+Starter estimate discussed: ₱15–30k/mo/bank. First bank likely free pilot for case study.
+
+FUNDING MVP OPTIONS
+-------------------
+1. Bootstrap via Clio cash flow
+2. Paid development contract with Bangko Kabayan
+3. Friends & family ₱1–2M
+4. Pre-seed (Foxmont, Kaya, Iterative) — needs committed design partner
+
+HORUS BRANDING
+--------------
+Full design system: branding (see horus-branding.txt)
+
+- Logos: wiki/assets/horus/horus-logo-dark.png · horus-logo-light.png
+- UI chrome: Institutional Brutalism · Klarheit Grotesk · MONOCHROME + GREEN ACCENT (locked palette)
+- Eye icon — oversight / seeing through messy financials
